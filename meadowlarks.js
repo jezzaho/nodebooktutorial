@@ -10,7 +10,7 @@ app.set('port', process.env.PORT || 3000);;
 var handlebars = require('express3-handlebars')
  .create({ defaultLayout:'main' });
 app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars')
+app.set('view engine', 'handlebars');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -33,7 +33,7 @@ app.use('/about', (req, res) => {
 });
 // add route to / 
 app.use('/', (req,res) => {
-    res.render('home')
+    res.render('home');
 });
 
 
