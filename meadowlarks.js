@@ -1,4 +1,7 @@
 var express = require('express');
+const { getFortune } = require('./lib/fortunes');
+
+var fortune = require('./lib/fortunes.js');
 
 var app = express();
 
@@ -11,21 +14,9 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static(__dirname + '/public'));
 
-// Fortune cookie array
-var fortunes = [
-    "Conquer your fears or they will conquer you.",
-    "Rivers need springs.",
-    "Do not fear what you don't know.",
-    "You will have a pleasant surprise.",
-    "Whenever possible, keep it simple.",
-];
-
-
-
 // add route to /about
 app.use('/about', (req, res) => {
-    var randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)];
-    res.render('about', { fortune: randomFortune });
+    res.render('about', { fortune: fortune.getFortune() });
 })
 // add route to / 
 app.use('/', (req,res) => {
