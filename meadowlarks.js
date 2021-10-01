@@ -14,10 +14,23 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static(__dirname + '/public'));
 
+//Middleware use for testing purpose
+app.use((req, res, next) => {
+    res.locals.showTests = app.get('env') !== 'production' && 
+        req.query.test === '1';
+    next();
+})
+
+
 // add route to /about
 app.use('/about', (req, res) => {
-    res.render('about', { fortune: fortune.getFortune() });
-})
+    res.render('about', 
+    { 
+        fortune: fortune.getFortune(), 
+        pageTestScript: '/qa/test-about.js'
+    });
+    
+});
 // add route to / 
 app.use('/', (req,res) => {
     res.render('home')
